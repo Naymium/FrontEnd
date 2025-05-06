@@ -1,13 +1,12 @@
-import './App.css'
-import Home from './Home.jsx'
-import AppRoutes from './router.jsx';
+import "./App.css";
+import AppRoutes from "./Router.jsx";
 
 function App() {
   return (
-    <div className='App'>
-    <Home />
+    <div className="App">
+      <AppRoutes />
     </div>
-  )
+  );
 }
 
 export default App;
