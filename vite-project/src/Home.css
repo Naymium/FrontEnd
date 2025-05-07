@@ -1,11 +1,11 @@
-.container {
+.home {
   width: 100vw;
   height: 100vh;
   background: white;
   font-family: "Pretendard", sans-serif;
 }
 
-button {
+.home button {
   border: none;
   padding: 0px;
   background-color: white;
@@ -13,15 +13,6 @@ button {
 
 button:hover {
   cursor: pointer;
-}
-
-.lab-logo-nest {
-  text-align: left;
-}
-
-.lab-logo {
-  width: 314px;
-  height: 98px;
 }
 
 .main-container {

@@ -2,27 +2,15 @@ import React from "react";
 import "./Home.css";
 
 import CheckBoxToggle from "./CheckBoxToggle.jsx";
-import logo from "./assets/lab_logo.png";
 import contacts from "./assets/contacts.png";
 import upload from "./assets/upload.svg";
 
 const Home = () => {
   const handleToggle = () => {};
   return (
-    <div className="container">
-      <div className="lab-logo-nest">
-        <button
-          style={{
-            marginTop: "25px",
-            marginLeft: "22px",
-          }}
-        >
-          <img className="lab-logo" src={logo} alt="lab logo" />
-        </button>
-      </div>
+    <div className="home">
       <div className="main-container">
         <div className="confirm-input-button" />
-        <div className="title-main">딥러닝 기반 PRN 코드 이상 탐지</div>
         <div className="redirection-nest">
           <button className="redirection" a="">
             최신 Ranging Error 그래프 보기 &gt;
