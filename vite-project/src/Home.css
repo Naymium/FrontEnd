@@ -96,7 +96,7 @@ button.redirection {
   padding-top: 31px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 26px;
 }
 
 .input-instance {
@@ -107,6 +107,7 @@ button.redirection {
   color: black;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
 }
 
 .input-instance#ranging-error {
@@ -114,15 +115,21 @@ button.redirection {
   margin-right: 64px;
 }
 
-.input-text-box {
+.distortion-variable {
   width: 42px;
   justify-content: normal;
 }
 
-.stringbox {
+CheckBoxToggle {
+  width: 26px;
+  height: 26px;
+}
+
+.input_box {
   width: 321px;
   height: 34px;
   background: #d9d9d9;
+  border: none;
 }
 
 /* 왜곡값 입력 라벨 */

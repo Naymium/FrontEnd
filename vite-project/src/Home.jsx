@@ -1,11 +1,13 @@
 import React from "react";
 import "./Home.css";
 
+import CheckBoxToggle from "./CheckBoxToggle.jsx";
 import logo from "./assets/lab_logo.png";
 import contacts from "./assets/contacts.png";
 import upload from "./assets/upload.svg";
 
 const Home = () => {
+  const handleToggle = () => {};
   return (
     <div className="container">
       <div className="lab-logo-nest">
@@ -43,61 +45,61 @@ const Home = () => {
           >
             <div className="input-instance">
               E1
-              <div className="stringbox"></div>
+              <input className="input_box"></input>
             </div>
             <div className="input-instance">
               E2
-              <div className="stringbox"></div>
+              <input className="input_box"></input>
             </div>
             <div className="input-instance">
               E3
-              <div className="stringbox"></div>
+              <input className="input_box"></input>
             </div>
             <div className="input-instance">
               E4
-              <div className="stringbox"></div>
+              <input className="input_box"></input>
             </div>
             <div className="input-instance">
               L1
-              <div className="stringbox"></div>
+              <input className="input_box"></input>
             </div>
             <div className="input-instance">
               L2
-              <div className="stringbox"></div>
+              <input className="input_box"></input>
             </div>
             <div className="input-instance">
               L3
-              <div className="stringbox"></div>
+              <input className="input_box"></input>
             </div>
             <div className="input-instance">
               L4
-              <div className="stringbox"></div>
+              <input className="input_box"></input>
             </div>
             <div className="input-instance" id="ranging-error">
               Ranging Error
-              <div className="stringbox"></div>
+              <input className="input_box"></input>
             </div>
           </div>
           <div className="input-subnest">
             <div className="text-left-nest" id="distortion">
-              왜곡값 입력 (선택사항)
+              왜곡값 입력 (선택사항, 입력 희망 시 체크박스 체크 후 입력)
             </div>
             <div className="input-instance">
-              <div className="checkbox"></div>
-              <div className="input-text-box">𝚫</div>
-              <div className="stringbox"></div>
+              <CheckBoxToggle onToggle={handleToggle} />
+              <div className="distortion-variable">𝚫</div>
+              <input className="input_box"></input>
             </div>
             <div className="input-instance">
-              <div className="checkbox"></div>
-              <div className="input-text-box">
+              <CheckBoxToggle onToggle={handleToggle} />
+              <div className="distortion-variable">
                 𝒇<sub>𝒅</sub>
               </div>
-              <div className="stringbox"></div>
+              <input className="input_box"></input>
             </div>
             <div className="input-instance">
-              <div className="checkbox"></div>
-              <div className="input-text-box">𝝈</div>
-              <div className="stringbox"></div>
+              <CheckBoxToggle onToggle={handleToggle} />
+              <div className="distortion-variable">𝝈</div>
+              <input className="input_box"></input>
             </div>
           </div>
         </div>
