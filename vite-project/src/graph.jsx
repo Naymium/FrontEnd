@@ -1,27 +1,22 @@
 import React from "react";
-import frame13213178492 from "./frame-1321317849-2.svg";
-import frame1321317849 from "./frame-1321317849.svg";
-import frame1321317850 from "./frame-1321317850.svg";
-import image4 from "./image-4.png";
-import image from "./image.svg";
-import "./style.css";
-import vector4609 from "./vector-4609.svg";
-import vector from "./vector.svg";
+// import frame13213178492 from "./frame-1321317849-2.svg";
+// import frame1321317849 from "./frame-1321317849.svg";
+// import frame1321317850 from "./frame-1321317850.svg";
+// import image4 from "./image-4.png";
+// import image from "./image.svg";
+import "./graph.css";
+// import vector4609 from "./vector-4609.svg";
+// import vector from "./vector.svg";
 
-export const RangingError = () => {
+const Graph = () => {
   return (
     <div className="ranging-error">
       <div className="div">
         <div className="flexcontainer">
-          <p className="text">
-            <span className="text-wrapper">
-              딥러닝 기반 <br />
-            </span>
-          </p>
-
-          <p className="text">
-            <span className="text-wrapper">PRN 코드 이상 탐지</span>
-          </p>
+          <div className="main-container">
+            <div className="confirm-input-button" />
+            <div className="title-main">딥러닝 기반 PRN 코드 이상 탐지</div>
+          </div>
         </div>
 
         <p className="p">Ranging Error Graph (정상 데이터)</p>
@@ -30,7 +25,7 @@ export const RangingError = () => {
           <div className="text-wrapper-2">최신 Ranging Error 그래프</div>
 
           <div className="arrow">
-            <img className="img" alt="Frame" src={frame1321317849} />
+            {/* <img className="img" alt="Frame" src={frame1321317849} /> */}
           </div>
         </div>
 
@@ -42,7 +37,7 @@ export const RangingError = () => {
           <div className="text-wrapper-4">파일 데이터 확인</div>
 
           <div className="arrow">
-            <img className="img" alt="Frame" src={image} />
+            {/* <img className="img" alt="Frame" src={image} /> */}
           </div>
         </div>
 
@@ -50,21 +45,21 @@ export const RangingError = () => {
           <div className="text-wrapper-4">전체 데이터 확인</div>
 
           <div className="arrow">
-            <img className="img" alt="Frame" src={frame13213178492} />
+            {/* <img className="img" alt="Frame" src={frame13213178492} /> */}
           </div>
         </div>
 
         <header className="header">
           <div className="div-2">
-            <img className="frame-4" alt="Frame" src={frame1321317850} />
+            {/* <img className="frame-4" alt="Frame" src={frame1321317850} /> */}
 
-            <img className="vector" alt="Vector" src={vector} />
+            {/* <img className="vector" alt="Vector" src={vector} /> */}
           </div>
         </header>
 
         <div className="text-wrapper-5">샘플 개수: 00000000</div>
 
-        <img className="vector-2" alt="Vector" src={vector4609} />
+        {/* <img className="vector-2" alt="Vector" src={vector4609} /> */}
 
         <footer className="footer">
           <div className="frame-5">
@@ -89,9 +84,11 @@ export const RangingError = () => {
         </footer>
 
         <div className="image-wrapper">
-          <img className="image" alt="Image" src={image4} />
+          {/* <img className="image" alt="Image" src={image4} /> */}
         </div>
       </div>
     </div>
   );
 };
+
+export default Graph;
