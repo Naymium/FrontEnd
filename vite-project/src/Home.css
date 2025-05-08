@@ -1,20 +1,3 @@
-.home {
-  width: 100vw;
-  height: 100vh;
-  background: white;
-  font-family: "Pretendard", sans-serif;
-}
-
-.home button {
-  border: none;
-  padding: 0px;
-  background-color: white;
-}
-
-button:hover {
-  cursor: pointer;
-}
-
 .main-container {
   margin-left: 90px;
   margin-right: 100px;
@@ -31,23 +14,6 @@ button:hover {
   -webkit-text-stroke-color: black;
 }
 
-/* 그래프 및 데이터 링크*/
-.redirection-nest {
-  width: 772px;
-  height: 24px;
-  padding-top: 76px;
-  left: 89px;
-  display: flex;
-  justify-content: space-between;
-}
-
-button.redirection {
-  color: #000;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-}
 .text-left-nest {
   text-align: left;
 }
