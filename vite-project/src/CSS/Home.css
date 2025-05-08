@@ -1,56 +1,72 @@
-.main-container {
-  margin-left: 90px;
+.home {
   margin-right: 100px;
+  margin-left: 100px;
+  margin-top: 17px;
   text-align: center;
-}
-
-/* 제목 */
-.title-main {
-  height: 76px;
-  font-size: 64px;
-  font-weight: 500;
-  color: #1639b9;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: black;
-}
-
-.text-left-nest {
-  text-align: left;
 }
 
 /* 입력 or 파일 첨부 택1 */
 .text-input-or-file {
-  padding-top: 26px;
+  padding-bottom: 13px;
   color: #c1bebe;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  text-align: right;
+  border-bottom: 2px solid #ddd;
+}
+
+.text-bracket-input-button {
+  padding-top: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 33px;
 }
 
 /* <입력값> / <파일첨부> */
 .text-bracket {
-  padding-top: 15px;
-  font-size: 20px;
-  color: #1639b9;
+  height: 29px;
+  color: #000;
+  font-family: "Pretendard Variable";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.home button.input-confirm {
+  width: 100px;
+  height: 39px;
+  padding: 8px 20px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 50px;
+  border: 2px solid #ddd;
+  background: #ddd;
+  color: #fff;
+  font-size: 16px;
   font-weight: 500;
 }
 
 /*큰 상자*/
 .input-nest {
-  width: 100%;
   height: 649px;
   display: flex;
-  border-radius: 20px;
-  border: 1px solid #1639b9;
+  border-radius: 3px;
+  border: 2px solid #ddd;
   background: #fff;
-  margin-top: 21px;
+  margin-top: 32px;
 }
 
 /*큰 상자 분할*/
 .input-subnest {
   width: 50%;
-  padding-top: 31px;
+  padding: 40px 28px;
   display: flex;
   flex-direction: column;
   gap: 26px;
@@ -58,18 +74,19 @@
 
 .input-instance {
   height: 42px;
-  margin-right: 118 px;
-  font-size: 36px;
-  font-weight: 500;
-  color: black;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-}
+  padding-right: 6px;
+  color: #000;
 
-.input-instance#ranging-error {
-  font-size: 28px;
-  margin-right: 64px;
+  /* 24-semibold */
+  font-family: "Pretendard Variable";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 48px;
 }
 
 .distortion-variable {
@@ -77,24 +94,28 @@
   justify-content: normal;
 }
 
-CheckBoxToggle {
-  width: 26px;
-  height: 26px;
+#right-subnest input.checkbox {
+  border: none;
+  background-color: #dddddd;
+  border-radius: 3px;
+  width: 20px;
+  height: 20px;
 }
 
 .input_box {
-  width: 321px;
+  width: 100%;
   height: 34px;
-  background: #d9d9d9;
+  background: #fff;
   border: none;
+  border-bottom: 1px solid #8a8a8a;
 }
 
 /* 왜곡값 입력 라벨 */
-.text-left-nest#distortion {
-  font-size: 20px;
-  font-weight: 500;
+.distortion-text {
+  font-size: 18px;
+  font-weight: 600;
   color: black;
-  padding-left: 31px;
+  text-align: left;
 }
 
 /* 파일 첨부 영역 박스 */
@@ -137,40 +158,10 @@ CheckBoxToggle {
   color: black;
 }
 
-/* 체크박스 (선택 옵션들) */
-.checkbox {
-  width: 26px;
-  height: 26px;
-  background: white;
-  border: 1px solid black;
-  left: 774px;
-}
-
 .input-confirm-nest {
   width: 100%;
   display: flex;
   justify-content: right;
   margin-top: 28px;
   margin-bottom: 28px;
-}
-
-button.input-confirm {
-  width: 128px;
-  height: 28px;
-  border-radius: 20px;
-  border: 1px solid #1639b9;
-  background: #fff;
-  font-size: 18px;
-  color: #1639b9;
-  font-weight: 500;
-}
-
-.contacts-Nest {
-  width: 100vw;
-  background-color: black;
-}
-
-.contacts {
-  min-width: 1443px;
-  min-height: 132px;
 }

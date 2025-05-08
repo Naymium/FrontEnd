@@ -4,7 +4,7 @@ import React from "react";
 // import frame1321317850 from "./frame-1321317850.svg";
 // import image4 from "./image-4.png";
 // import image from "./image.svg";
-import "./graph.css";
+import "../CSS/Graph.css";
 // import vector4609 from "./vector-4609.svg";
 // import vector from "./vector.svg";
 

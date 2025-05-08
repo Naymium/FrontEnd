@@ -31,7 +31,7 @@ button:hover {
   font-size: 62px;
   font-style: normal;
   font-weight: 700;
-  line-height: 94px; /* 151.613% */
+  line-height: 110px; /* 151.613% */
   letter-spacing: -1.86px;
 }
 
@@ -40,9 +40,13 @@ button:hover {
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  gap: 16px;
 }
 
 button.redirection {
+  height: 40px;
   border-radius: 50px;
   border-width: 2px;
   border-color: black;

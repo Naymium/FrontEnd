@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./Home";
-import Graph from "./Graph";
+import Home from "./Pages/Home";
+import Graph from "./Pages/Graph";
 
 const AppRoutes = () => {
   return (
