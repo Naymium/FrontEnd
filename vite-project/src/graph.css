@@ -112,12 +112,12 @@
 
 .ranging-error .text-wrapper-3 {
   color: #ffffff;
-  font-family: var(--16-meidum-font-family);
-  font-size: var(--16-meidum-font-size);
-  font-style: var(--16-meidum-font-style);
-  font-weight: var(--16-meidum-font-weight);
-  letter-spacing: var(--16-meidum-letter-spacing);
-  line-height: var(--16-meidum-line-height);
+  font-family: var(--16-medium-font-family);
+  font-size: var(--16-medium-font-size);
+  font-style: var(--16-medium-font-style);
+  font-weight: var(--16-medium-font-weight);
+  letter-spacing: var(--16-medium-letter-spacing);
+  line-height: var(--16-medium-line-height);
   margin-top: -2px;
   position: relative;
   white-space: nowrap;

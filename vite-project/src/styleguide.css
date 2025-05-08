@@ -1,0 +1,86 @@
+:root {
+  --14-medium-font-family: "Pretendard Variable", Helvetica;
+  --14-medium-font-size: 14px;
+  --14-medium-font-style: normal;
+  --14-medium-font-weight: 500;
+  --14-medium-letter-spacing: 0px;
+  --14-medium-line-height: normal;
+  --16-medium-font-family: "Pretendard Variable", Helvetica;
+  --16-medium-font-size: 16px;
+  --16-medium-font-style: normal;
+  --16-medium-font-weight: 500;
+  --16-medium-letter-spacing: 0px;
+  --16-medium-line-height: normal;
+  --18-medium-font-family: "Pretendard Variable", Helvetica;
+  --18-medium-font-size: 18px;
+  --18-medium-font-style: normal;
+  --18-medium-font-weight: 500;
+  --18-medium-letter-spacing: 0px;
+  --18-medium-line-height: normal;
+  --18-semibold-font-family: "Pretendard Variable", Helvetica;
+  --18-semibold-font-size: 18px;
+  --18-semibold-font-style: normal;
+  --18-semibold-font-weight: 600;
+  --18-semibold-letter-spacing: 0px;
+  --18-semibold-line-height: normal;
+  --20-semibold-font-family: "Pretendard Variable", Helvetica;
+  --20-semibold-font-size: 20px;
+  --20-semibold-font-style: normal;
+  --20-semibold-font-weight: 600;
+  --20-semibold-letter-spacing: 0px;
+  --20-semibold-line-height: normal;
+  --24-semibold-font-family: "Pretendard Variable", Helvetica;
+  --24-semibold-font-size: 24px;
+  --24-semibold-font-style: normal;
+  --24-semibold-font-weight: 600;
+  --24-semibold-letter-spacing: 0px;
+  --24-semibold-line-height: normal;
+  --36-bold-font-family: "Pretendard Variable", Helvetica;
+  --36-bold-font-size: 36px;
+  --36-bold-font-style: normal;
+  --36-bold-font-weight: 700;
+  --36-bold-letter-spacing: 0px;
+  --36-bold-line-height: normal;
+  --62-bold-font-family: "Pretendard Variable", Helvetica;
+  --62-bold-font-size: 62px;
+  --62-bold-font-style: normal;
+  --62-bold-font-weight: 700;
+  --62-bold-letter-spacing: -1.86px;
+  --62-bold-line-height: 94px;
+  --variable-collection-color-background-box: rgba(248, 248, 248, 1);
+  --variable-collection-color-black: rgba(0, 0, 0, 1);
+  --variable-collection-color-blue: rgba(5, 114, 255, 1);
+  --variable-collection-color-line: rgba(138, 138, 138, 1);
+  --variable-collection-color-line-light: rgba(221, 221, 221, 1);
+  --variable-collection-color-white: rgba(255, 255, 255, 1);
+}
+
+/*
+
+To enable a theme in your HTML, simply add one of the following data attributes to an HTML element, like so:
+
+<body data-variable-collection-mode="light-mode">
+    <!-- the rest of your content -->
+</body>
+
+You can apply the theme on any DOM node, not just the `body`
+
+*/
+
+[data-variable-collection-mode="light-mode"] {
+  --variable-collection-color-background-box: rgba(248, 248, 248, 1);
+  --variable-collection-color-black: rgba(0, 0, 0, 1);
+  --variable-collection-color-blue: rgba(5, 114, 255, 1);
+  --variable-collection-color-line: rgba(138, 138, 138, 1);
+  --variable-collection-color-line-light: rgba(221, 221, 221, 1);
+  --variable-collection-color-white: rgba(255, 255, 255, 1);
+}
+
+[data-variable-collection-mode="dark-mode"] {
+  --variable-collection-color-background-box: rgba(78, 78, 78, 1);
+  --variable-collection-color-black: rgba(255, 255, 255, 1);
+  --variable-collection-color-blue: rgba(59, 180, 255, 1);
+  --variable-collection-color-line: rgba(183, 183, 183, 1);
+  --variable-collection-color-line-light: rgba(135, 135, 135, 1);
+  --variable-collection-color-white: rgba(35, 35, 35, 1);
+}

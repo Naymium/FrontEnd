@@ -1,5 +1,6 @@
 import "./Header.css";
-import logo from "./assets/lab_logo.png";
+import logo from "./assets/lab_logo.svg";
+import arrow from "./assets/redirection_arrow.svg";
 
 const Header = () => {
   return (
@@ -14,11 +15,18 @@ const Header = () => {
           PRN 코드 이상 탐지
         </div>
         <div className="button-nest">
-          <button className="redirection">
+          <button className="redirection" style={{width:"300px"}}>
             최신 ranging error 그래프 보기
+            <img className="arrow" src={arrow} />
           </button>
-          <button className="redirection">파일 데이터 확인</button>
-          <button className="redirection">전체 데이터 확인</button>
+          <button className="redirection" style={{width:"200px"}}>
+            파일 데이터 확인
+            <img className="arrow" src={arrow} />
+          </button>
+          <button className="redirection"style={{width:"200px"}}>
+            전체 데이터 확인
+            <img className="arrow" src={arrow} />
+          </button>
         </div>
       </div>
     </div>

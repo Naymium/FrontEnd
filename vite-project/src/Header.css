@@ -5,12 +5,7 @@
   margin-right: 100px;
 }
 
-.lab-logo {
-  width: 314px;
-  height: 98px;
-}
-
-button {
+.header button {
   padding: 0px;
   margin: 0;
   background-color: white;
@@ -44,14 +39,33 @@ button:hover {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: flex-end;
 }
 
 button.redirection {
-  border-radius: 20px;
+  border-radius: 50px;
   border-width: 2px;
   border-color: black;
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 8px;
   padding-bottom: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: #000;
+
+  /* 18-semibold */
+  font-family: "Pretendard Variable";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+button.arrow {
+  width: 29.694px;
+  height: 29.694px;
+  flex-shrink: 0;
 }

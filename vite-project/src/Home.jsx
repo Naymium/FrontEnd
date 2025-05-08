@@ -2,26 +2,12 @@ import React from "react";
 import "./Home.css";
 
 import CheckBoxToggle from "./CheckBoxToggle.jsx";
-import contacts from "./assets/contacts.png";
 import upload from "./assets/upload.svg";
 
 const Home = () => {
   const handleToggle = () => {};
   return (
-    <div className="home">
       <div className="main-container">
-        <div className="confirm-input-button" />
-        <div className="redirection-nest">
-          <button className="redirection" a="">
-            최신 Ranging Error 그래프 보기 &gt;
-          </button>
-          <button className="redirection" a="">
-            파일 데이터 확인하기 &gt;
-          </button>
-          <button className="redirection" a="">
-            전체 데이터 확인하기 &gt;
-          </button>
-        </div>
         <div className="text-left-nest">
           <div className="text-input-or-file">입력 or 파일첨부 택1</div>
           <div className="text-bracket">&lt;입력값&gt;</div>
@@ -106,10 +92,6 @@ const Home = () => {
           <button className="input-confirm">입력</button>
         </div>
       </div>
-      <div className="contacts-Nest">
-        <img className="contacts" src={contacts} alt="contacts" />
-      </div>
-    </div>
   );
 };
 
