@@ -1,6 +1,6 @@
-import "./Header.css";
-import logo from "./assets/lab_logo.svg";
-import arrow from "./assets/redirection_arrow.svg";
+import "../CSS/Header.css";
+import logo from "../assets/lab_logo.svg";
+import arrow from "../assets/redirection_arrow.svg";
 
 const Header = () => {
   return (
