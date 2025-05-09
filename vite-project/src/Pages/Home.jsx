@@ -87,15 +87,12 @@ const Home = () => {
         <div className="text-bracket">파일첨부</div>
         <button className="input-confirm">입력하기</button>
       </div>
+      <div className="file-info-text">일반파일 0KB/최대 10MB</div>
       <div className="drag-drop-nest">
-        <div className="file-info-text">일반파일 0KB/ 최대10MB</div>
         <div className="drag-drop-text">
           <img className="upload" src={upload} alt="upload" />
           첨부파일을 마우스로 끌어 놓으세요
         </div>
-      </div>
-      <div className="input-confirm-nest">
-        <button className="input-confirm">입력</button>
       </div>
     </div>
   );

@@ -5,6 +5,11 @@
   margin-right: 100px;
 }
 
+.header a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .header button {
   padding: 0px;
   margin: 0;
