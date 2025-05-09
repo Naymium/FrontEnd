@@ -1,4 +1,3 @@
-import React from "react";
 // import frame13213178492 from "./frame-1321317849-2.svg";
 // import frame1321317849 from "./frame-1321317849.svg";
 // import frame1321317850 from "./frame-1321317850.svg";

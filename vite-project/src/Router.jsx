@@ -1,16 +1,13 @@
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./Pages/Home";
-import Graph from "./Pages/Graph";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Graph from "./Pages/Graph.jsx";
+import Home from "./Pages/Home.jsx";
 
 const AppRoutes = () => {
   return (
-    <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/graph" element={<Graph />} />
       </Routes>
-    </BrowserRouter>
   );
 };
 
