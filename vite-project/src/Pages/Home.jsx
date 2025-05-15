@@ -1,4 +1,3 @@
-import React from "react";
 import "../CSS/Home.css";
 
 import CheckBoxToggle from "../Components/CheckBoxToggle.jsx";
