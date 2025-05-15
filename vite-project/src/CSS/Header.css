@@ -16,11 +16,11 @@
   background-color: white;
 }
 
-button:hover {
+.header button:hover {
   cursor: pointer;
 }
 
-.title-button-nest {
+.header .title-button-nest {
   height: 191px;
   margin-top: 40px;
   display: flex;
@@ -28,7 +28,7 @@ button:hover {
   justify-content: space-between;
 }
 
-.title-main {
+.header .title-main {
   width: 500px;
   color: var(--Color-Black, #000);
 
@@ -40,7 +40,7 @@ button:hover {
   letter-spacing: -1.86px;
 }
 
-.button-nest {
+.header .button-nest {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -50,7 +50,7 @@ button:hover {
   gap: 16px;
 }
 
-button.redirection {
+.header button.redirection {
   height: 40px;
   border-radius: 50px;
   border-width: 2px;
@@ -73,7 +73,7 @@ button.redirection {
   line-height: normal;
 }
 
-button.arrow {
+.header button.arrow {
   width: 29.694px;
   height: 29.694px;
   flex-shrink: 0;
