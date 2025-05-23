@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 1240px; /* 적당한 너비 */
+  width: 1240px;
   border: 2px solid #ddd;
   border-radius: 6px;
   padding: 40px 60px;
@@ -24,7 +24,6 @@
   font-weight: 700;
   font-size: 36px;
   color: #1639b9;
-  /* Header의 타이틀 느낌과 맞춤 */
 }
 
 .graph-save-button {
@@ -67,7 +66,7 @@
   padding: 10px;
   background-color: #fafafa;
   box-sizing: border-box;
-  min-height: 600px; /* 그래프 이미지 높이 대략 지정 */
+  min-height: 600px;
 }
 
 .graph-image {

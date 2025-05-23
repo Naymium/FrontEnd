@@ -14,7 +14,7 @@ const Graph = () => {
       </div>
 
       <div className="graph-image-wrapper">
-        {/* <img className="img" alt="Frame" src={image} /> */}
+        {/* <img className="image" alt="Image" src={image4} /> */}
         <img
           src="/assets/graph-image.png"
           alt="Ranging Error Graph"
