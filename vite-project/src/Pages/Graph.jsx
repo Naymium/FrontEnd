@@ -13,7 +13,7 @@ const Graph = () => {
       </div>
 
       <div className="graph-box">
-        {/* 여기에 그래프 이미지나 컴포넌트 삽입 */}
+        {}
         {/* <img src={image4} alt="Ranging Error Graph" /> */}
       </div>
     </div>
