@@ -31,7 +31,7 @@ const Header = () => {
               <img className="arrow" src={arrow} />
             </button>
           </Link>
-          <Link to="">
+          <Link to="/entire-data">
             <button className="redirection" style={{ width: "200px" }}>
               전체 데이터 확인
               <img className="arrow" src={arrow} />
