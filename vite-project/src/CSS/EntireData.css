@@ -1,0 +1,50 @@
+.ed-container {
+  margin: 0 100px 0 100px;
+}
+
+.ed-line {
+  height: 33px;
+  border-bottom: 2px solid #ddd;
+}
+
+.ed-head {
+  margin-top: 43px;
+  margin-bottom: 18px;
+  height: 43px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ed-head-text {
+  width: 240px;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.ed-head-button-nest {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.ed-button-save {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  width: 95px;
+  height: 36px;
+  border-radius: 50px;
+  border: 2px solid #000;
+  background: #000;
+}
+
+.ed-button-export {
+  color: #000;
+  font-size: 16px;
+  font-weight: 500;
+  width: 95px;
+  height: 36px;
+  border-radius: 50px;
+  border: 2px solid #000;
+  background: #fff;
+}

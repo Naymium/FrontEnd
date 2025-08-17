@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import "../CSS/Home.css";
 
 import CheckBoxToggle from "../Components/CheckBoxToggle.jsx";
@@ -10,7 +12,9 @@ const Home = () => {
       <div className="text-input-or-file">입력 or 파일첨부 택1</div>
       <div className="text-bracket-input-button">
         <div className="text-bracket">입력값</div>
-        <button className="input-confirm">입력하기</button>
+        <Link to="/results">
+          <button className="input-confirm">입력하기</button>
+        </Link>
       </div>
       <div className="input-nest">
         <div
@@ -84,9 +88,11 @@ const Home = () => {
       <div style={{ height: "29px", borderBottom: "2px solid #ddd" }} />
       <div className="text-bracket-input-button">
         <div className="text-bracket">파일첨부</div>
-        <button className="input-confirm">입력하기</button>
+        <div className="file-info-text">일반파일 0KB/최대 10MB</div>
+        <Link to="/results">
+          <button className="input-confirm">입력하기</button>
+        </Link>
       </div>
-      <div className="file-info-text">일반파일 0KB/최대 10MB</div>
       <div className="drag-drop-nest">
         <div className="drag-drop-text">
           <img className="upload" src={upload} alt="upload" />
