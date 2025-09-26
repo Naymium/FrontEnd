@@ -15,7 +15,8 @@
   overflow: hidden;
 }
 
-.thead, .tr {
+.thead,
+.tr {
   display: grid;
   grid-template-columns: 80px 1fr 150px 150px 100px 100px;
   align-items: center;
@@ -26,12 +27,15 @@
   font-weight: bold;
 }
 
-.thead div, .tr div {
-  padding: 12px;
+.thead div,
+.tr div {
+  height: 80px;
   border-bottom: 1px solid #eee;
+  align-content: center;
 }
 
-.open-btn, .delete-btn {
+.open-btn,
+.delete-btn {
   padding: 6px 12px;
   border-radius: 20px;
   font-size: 13px;
@@ -45,18 +49,18 @@
 }
 
 .delete-btn {
-  min-width: 80px;           /* 버튼 크기 일정하게 */
-  height: 36px;              /* 네모 모양 */
+  min-width: 80px; /* 버튼 크기 일정하게 */
+  height: 32px; /* 네모 모양 */
   padding: 4px 8px;
-  border-radius: 4px;        /* 살짝 둥근 네모 (필요없으면 0) */
-  border: 2px solid #000;    /* 검정 테두리 */
-  background: #fff;          /* 흰 배경 */
-  color: #000;               /* 글자 검정 */
-  font-size: 13px;           /* 글씨 크기 적당히 */
+  border-radius: 3px; /* 살짝 둥근 네모 (필요없으면 0) */
+  border: 1px solid #000; /* 검정 테두리 */
+  background: #fff; /* 흰 배경 */
+  color: #000; /* 글자 검정 */
+  font-size: 13px; /* 글씨 크기 적당히 */
   font-weight: 600;
-  white-space: nowrap;       /* 글씨 줄바꿈 방지 */
-  overflow: hidden;          /* 넘치면 숨김 */
-  text-overflow: ellipsis;   /* 넘치면 ... 처리 */
+  white-space: nowrap; /* 글씨 줄바꿈 방지 */
+  overflow: hidden; /* 넘치면 숨김 */
+  text-overflow: ellipsis; /* 넘치면 ... 처리 */
   cursor: pointer;
 }
 
@@ -86,7 +90,7 @@
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.3);
+  background: rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: center;
   align-items: center;
