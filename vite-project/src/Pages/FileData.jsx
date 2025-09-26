@@ -52,7 +52,7 @@ const FileData = () => {
                     <div>데이터 개수</div>
                     <div>저장 날짜</div>
                     <div>열기</div>
-                    <div>데이터 삭제</div>
+                    <div>삭제</div>
                 </div>
 
                 <div className="tbody">
@@ -66,7 +66,7 @@ const FileData = () => {
                                 <button className="open-btn" onClick={() => onOpen(row)}>열기</button>
                             </div>
                             <div>
-                                <button className="delete-btn" onClick={() => onDelete(row)}>삭제</button>
+                                <button className="delete-btn" onClick={() => onDelete(row)}>데이터 삭제</button>
                             </div>
                         </div>
                     ))}
