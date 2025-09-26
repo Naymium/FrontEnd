@@ -8,7 +8,7 @@ const Graph = () => {
       <div className="graph-section-divider" />
 
       <div className="graph-section-title">
-        <strong>Ranging Error Graph (정상 데이터)</strong>
+        Ranging Error Graph (정상 데이터)
       </div>
 
       <div className="graph-sample-save-wrapper">
