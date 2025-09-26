@@ -25,7 +25,7 @@ const Header = () => {
               <img className="arrow" src={arrow} />
             </button>
           </Link>
-          <Link to="">
+          <Link to="/filedata">
             <button className="redirection" style={{ width: "200px" }}>
               파일 데이터 확인
               <img className="arrow" src={arrow} />
