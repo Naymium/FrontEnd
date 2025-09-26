@@ -12,17 +12,17 @@ const EntireData = () => {
       getAllDataResponseDTO: [
         {
           id: 1,
-          e1: 0.0,
-          e2: 0.0,
-          e3: 0.0,
-          e4: 0.0,
-          l1: 0.0,
-          l2: 0.0,
-          l3: 0.0,
-          l4: 0.0,
-          delta: 0.0,
-          fd: 0.0,
-          sigma: 0.0,
+          e1: 0.0000,
+          e2: 0.0000,
+          e3: 0.0000,
+          e4: 0.0000,
+          l1: 0.0000,
+          l2: 0.0000,
+          l3: 0.0000,
+          l4: 0.0000,
+          delta: 0.0000,
+          fd: 0.0000,
+          sigma: 0.0000,
           predictionStatus: "비정상",
           predictionProbability: "00.00%",
           rangingError: "2.15",
@@ -65,33 +65,31 @@ const EntireData = () => {
     },
   };
 
-  useEffect(() => {
-    // Use the local data directly
-    const dataListInstance = localTestData.result.getAllDataResponseDTO;
-    setDataList(dataListInstance);
-    console.log(dataListInstance);
-  }, []);
-
   // useEffect(() => {
-  //   const apiURL = "http://3.39.225.132:8080";
-  //   const endpoint = "/data/get";
-
-  //   axios
-  //     .get(apiURL + endpoint)
-  //     .then((res) => {
-  //       const dataListInstance = res.data?.result?.getAllDataResponseDTO || [];
-  //       setDataList(dataListInstance);
-  //       console.log(dataListInstance);
-  //     })
-
-  //     .catch((err) => {
-  //       alert(err.response.data.message);
-  //     });
+  //   const dataListInstance = localTestData.result.getAllDataResponseDTO;
+  //   setDataList(dataListInstance);
+  //   console.log(dataListInstance);
   // }, []);
+
+  useEffect(() => {
+    const apiURL = "http://3.39.225.132:8080";
+    const endpoint = "/data/get";
+
+    axios
+      .get(apiURL + endpoint)
+      .then((res) => {
+        const dataListInstance = res.data?.result?.getAllDataResponseDTO || [];
+        setDataList(dataListInstance);
+        console.log(dataListInstance);
+      })
+
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
+  }, []);
 
   return (
     <div className="ed-container">
-      <div className="ed-line" />
       <div className="ed-head">
         <div className="ed-head-text">전체 데이터 확인</div>
         <div className="ed-head-button-nest">
@@ -107,7 +105,7 @@ const EntireData = () => {
         <ul className="ed-item-list">
           {dataList.map((item) => (
             <li key={item.id} className="ed-data-item">
-              <div className="ed-data-item-label">샘플 {item.id}</div>
+              <div className="ed-data-item-label">Data {item.id}</div>
               <div className="ed-data-item-content">
                 <div className="ed-data-label-nest">
                   <div className="ed-data-label">
