@@ -131,14 +131,14 @@ const EntireData = () => {
                   </div>
                   <div className="ed-data-param" id="row-2">
                     <div className="ed-data">𝚫: {item.delta}</div>
-                    <div className="ed-data">fd: {item.fd}</div>
+                    <div className="ed-data"><i>f<sub>d</sub></i>: {item.fd}</div>
                     <div className="ed-data">σ: {item.sigma}</div>
                   </div>
                   <div className="ed-data-prediction-button-nest">
                     <div className="ed-data-prediction">
                       <div className="ed-data-prediction-status">
-                        {item.predictionStatus} (확률:{" "}
-                        {item.predictionProbability})
+                        {item.prediction} (확률:{" "}
+                        {item.probability})
                       </div>{" "}
                       <div className="ed-data-divider"> | </div>
                       <div className="ed-data-ranging-error">
