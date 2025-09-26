@@ -3,16 +3,10 @@
 }
 
 .title {
-  font-size: 24px;
+  font-size: 36px;
   font-weight: 700;
   margin: 16px 0;
   text-align: left;
-}
-
-.filedata-section-divider {
-  border-top: 2px solid #ddd;
-  margin-top: 40px;
-  margin-bottom: 30px;
 }
 
 .table {

@@ -56,7 +56,6 @@
   margin-bottom: 19px;
 }
 
-/* Styles for the container of the data list, which holds all the repeatable items */
 .ed-item-list {
   display: flex;
   flex-direction: column;
@@ -71,7 +70,8 @@
 }
 
 .ed-data-item-label {
-  width: 70px;
+  width: 80px;
+  text-align: left;
   color: #000;
   font-family: "Pretendard Variable";
   font-size: 24px;

@@ -20,8 +20,8 @@ const Header = () => {
         </div>
         <div className="button-nest">
           <Link to="/graph">
-            <button className="redirection" style={{ width: "300px" }}>
-              최신 ranging error 그래프 보기
+            <button className="redirection" style={{ width: "310px" }}>
+              최신 Ranging Error 그래프 보기
               <img className="arrow" src={arrow} />
             </button>
           </Link>

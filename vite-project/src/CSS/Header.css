@@ -3,6 +3,8 @@
   margin-left: 100px;
   margin-top: 40px;
   margin-right: 100px;
+  padding-bottom: 33px;
+  border-bottom: 2px solid #ddd;
 }
 
 .header a {

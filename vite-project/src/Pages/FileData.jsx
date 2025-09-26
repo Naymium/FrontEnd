@@ -42,7 +42,6 @@ const FileData = () => {
     return (
         <div className="filedata-container">
             {/* 제목 */}
-            <div className="filedata-section-divider" />
             <h2 className="title">저장된 파일 데이터 확인</h2>
 
             {/* 테이블 */}
