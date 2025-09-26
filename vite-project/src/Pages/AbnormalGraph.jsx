@@ -5,10 +5,9 @@ import leftArrow from "../assets/free-icon-left-arrow-271220.png"; // 왼쪽 화
 const AbnormalGraph = () => {
   return (
     <div className="abnormal-graph-container">
-      <div className="abnormal-section-divider" />
 
       <div className="abnormal-section-title">
-        <strong>Ranging Error Graph (비정상 데이터)</strong>
+        Ranging Error Graph (비정상 데이터)
       </div>
 
       <div className="abnormal-sample-save-wrapper">
