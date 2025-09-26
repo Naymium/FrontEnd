@@ -23,22 +23,25 @@
 }
 
 .header .title-button-nest {
-  height: 191px;
+  height: auto;
   margin-top: 40px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap : 16px;
 }
 
 .header .title-main {
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
   color: var(--Color-Black, #000);
 
   font-family: "Pretendard Variable";
-  font-size: 62px;
+  font-size: clamp(28px, 6vw, 62px);
   font-style: normal;
   font-weight: 700;
-  line-height: 110px; /* 151.613% */
+  line-height: 1.25;
   letter-spacing: -1.86px;
 }
 
@@ -53,30 +56,47 @@
 }
 
 .header button.redirection {
-  height: 40px;
   border-radius: 50px;
   border-width: 2px;
   border-color: black;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding: 8px 16px;          
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   color: #000;
-
-  /* 18-semibold */
   font-family: "Pretendard Variable";
-  font-size: 18px;
-  font-style: normal;
+  font-size: clamp(14px, 1.8vw, 18px);
   font-weight: 600;
-  line-height: normal;
+  line-height: 1.1;
 }
 
+
+
 .header button.arrow {
-  width: 29.694px;
-  height: 29.694px;
+  width: clamp(18px, 2.5vw, 29.694px);
+  height: auto;
   flex-shrink: 0;
+  margin-left: 8px;
+}
+
+
+.header .redirection {
+  border: 2px solid #ccc;
+  background: #f5f5f5;
+  color: #888;
+  border-radius: 50px;
+  padding: 8px 20px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.header .redirection.active {
+  border-color: #000;
+  background: #fff;
+  color: #000;
 }
