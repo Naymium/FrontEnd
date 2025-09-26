@@ -48,3 +48,118 @@
   border: 2px solid #000;
   background: #fff;
 }
+
+.ed-item-nest {
+  border-radius: 3px 0 0 3px;
+  border: 2px solid #ddd;
+  padding: 40px 60px;
+  margin-bottom: 19px;
+}
+
+/* Styles for the container of the data list, which holds all the repeatable items */
+.ed-item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  list-style: none;
+}
+
+.ed-data-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.ed-data-item-label {
+  width: 70px;
+  color: #000;
+  font-family: "Pretendard Variable";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.ed-data-item-content {
+  display: flex;
+  flex-direction: row;
+  border: 2px solid #ddd;
+  border-radius: 3px;
+  padding: 20px;
+  color: #000;
+  font-family: "Pretendard Variable";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.ed-data-label-nest {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.ed-data-label {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 87px;
+}
+
+.ed-data-divider {
+  margin: 0 8px 0 10px;
+}
+
+.ed-data-nest {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ed-data-param#row-1 {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.ed-data-param#row-2 {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.ed-data {
+  display: flex;
+  justify-content: space-between;
+  width: 90px;
+}
+
+.ed-data-prediction-button-nest {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.ed-data-prediction {
+  display: flex;
+  flex-direction: row;
+}
+
+.ed-data-prediction-status {
+  width: 175px;
+}
+
+.ed-data-delete-button {
+  background-color: #fff;
+  color: #000;
+  width: 100px;
+  height: 32px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 3px;
+  border: 1px solid #000;
+}
