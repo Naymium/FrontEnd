@@ -51,9 +51,19 @@
 }
 
 .delete-btn {
-  background: white;
-  border: 1px solid red;
-  color: red;
+  min-width: 80px;           /* 버튼 크기 일정하게 */
+  height: 36px;              /* 네모 모양 */
+  padding: 4px 8px;
+  border-radius: 4px;        /* 살짝 둥근 네모 (필요없으면 0) */
+  border: 2px solid #000;    /* 검정 테두리 */
+  background: #fff;          /* 흰 배경 */
+  color: #000;               /* 글자 검정 */
+  font-size: 13px;           /* 글씨 크기 적당히 */
+  font-weight: 600;
+  white-space: nowrap;       /* 글씨 줄바꿈 방지 */
+  overflow: hidden;          /* 넘치면 숨김 */
+  text-overflow: ellipsis;   /* 넘치면 ... 처리 */
+  cursor: pointer;
 }
 
 .pagination {
