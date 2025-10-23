@@ -1,11 +1,9 @@
-/* =========================
-   Normal: Graph (정상 데이터)
-   ========================= */
+
 .graph-container {
   margin-left: 100px;
   margin-right: 100px;
   margin-top: 40px;
-  position: relative; /* ▶ 화살표 절대배치를 위한 기준 */
+  position: relative; 
 }
 
 .graph-section-title {
@@ -30,30 +28,21 @@
   border: 2px solid #ddd;
   border-radius: 3px;
   background-color: #f9f9f9;
+  position: relative;
 }
 
-.graph-image {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-}
-
-/* ▶ 오른쪽 화살표: 섹션 내부 오른쪽 중앙 고정 */
 .arrow-button-container {
   position: absolute;
-  top: 55%;
-  right: 0;
+  top: 50%;
+  right: -50px; 
   transform: translateY(-50%);
 }
 
-/* =========================
-   Abnormal: AbnormalGraph (비정상 데이터)
-   ========================= */
 .abnormal-graph-container {
   margin-left: 100px;
   margin-right: 100px;
   margin-top: 40px;
-  position: relative; /* ◀ 왼쪽 화살표 기준 */
+  position: relative;
 }
 
 .abnormal-section-title {
@@ -79,19 +68,16 @@
   border-radius: 3px;
   background-color: #f9f9f9;
   margin-bottom: 20px;
+  position: relative;
 }
 
-/* ◀ 왼쪽 화살표: 섹션 내부 왼쪽 중앙 고정 */
 .left-arrow-button-container {
   position: absolute;
-  top: 55%;
-  left: 0;
+  top: 50%;
+  left: -50px; 
   transform: translateY(-50%);
 }
 
-/* =========================
-   공통
-   ========================= */
 .sample-count {
   font-size: 20px;
   font-weight: 500;
@@ -110,13 +96,12 @@
   white-space: nowrap;
 }
 
-/* 버튼 리셋 + 크기 통일 */
 .arrow-button {
   background: none;
   border: none;
   padding: 0;
-  width: 32px;
-  height: 32px;
+  width: 36px; 
+  height: 36px;
   cursor: pointer;
   z-index: 10;
   display: inline-flex;
