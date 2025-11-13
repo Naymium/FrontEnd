@@ -133,7 +133,7 @@
 
 .ed-data {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 90px;
 }
 
@@ -149,7 +149,7 @@
 }
 
 .ed-data-prediction-status {
-  width: 175px;
+  width: 250px;
 }
 
 .ed-data-delete-button {

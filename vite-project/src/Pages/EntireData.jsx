@@ -20,7 +20,10 @@ const EntireData = () => {
         setDataList(dataListInstance);
       })
       .catch((err) => {
-        alert(err.response?.data?.message || "데이터를 불러오는 중 오류가 발생했습니다.");
+        alert(
+          err.response?.data?.message ||
+            "데이터를 불러오는 중 오류가 발생했습니다."
+        );
       })
       .finally(() => {
         setLoading(false);
@@ -67,9 +70,9 @@ const EntireData = () => {
           <div className="ed-empty-message">저장된 데이터가 없습니다.</div>
         ) : (
           <ul className="ed-item-list">
-            {dataList.map((item) => (
+            {dataList.map((item, index) => (
               <li key={item.id} className="ed-data-item">
-                <div className="ed-data-item-label">Data {item.id}</div>
+                <div className="ed-data-item-label">Data {index + 1}</div>
                 <div className="ed-data-item-content">
                   <div className="ed-data-label-nest">
                     <div className="ed-data-label">
@@ -96,21 +99,22 @@ const EntireData = () => {
                     </div>
 
                     <div className="ed-data-param" id="row-2">
-                      <div className="ed-data">𝚫: {item.delta}</div>
+                      <div className="ed-data">𝚫 : {item.delta}</div>
+                      <div className="ed-data">σ : {item.sigma}</div>
                       <div className="ed-data">
-                        𝒇
-                        <sub>
+                        <div>
+                          𝒇
                           <sub>𝒅</sub>
-                        </sub>
-                        : {item.fd}
+                        </div>
+                        &nbsp;: {item.fd}
                       </div>
-                      <div className="ed-data">σ: {item.sigma}</div>
                     </div>
 
                     <div className="ed-data-prediction-button-nest">
                       <div className="ed-data-prediction">
                         <div className="ed-data-prediction-status">
-                          {item.prediction} (확률: {item.probability})
+                          {item.prediction} (확률: {item.probability * 100}%)
+                          {console.log(item.probability)}
                         </div>
                         <div className="ed-data-divider"> | </div>
                         <div className="ed-data-ranging-error">
@@ -124,7 +128,9 @@ const EntireData = () => {
                           onClick={() => handleDelete(item.id)}
                           disabled={deletingId === item.id}
                         >
-                          {deletingId === item.id ? "삭제 중..." : "데이터 삭제"}
+                          {deletingId === item.id
+                            ? "삭제 중..."
+                            : "데이터 삭제"}
                         </button>
                       </div>
                     </div>
