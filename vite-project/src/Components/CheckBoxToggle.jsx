@@ -1,21 +1,12 @@
-// CheckboxToggle.jsx
-import React, { useState } from "react";
-
-const CheckBoxToggle = ({ onToggle }) => {
-  const [checked, setChecked] = useState(false);
-
+const CheckBoxToggle = ({ checked = false, onToggle }) => {
   const handleChange = () => {
-    setChecked((prev) => {
-      const newChecked = !prev;
-      if (onToggle) onToggle(newChecked);
-      return newChecked;
-    });
+    if (onToggle) onToggle(!checked); // parent decides new state
   };
 
   return (
     <div>
       <input
-        style={{ width: "26px", height: "26px" }}
+        style={{ width: "26px", height: "26px", cursor: "pointer" }}
         type="checkbox"
         checked={checked}
         onChange={handleChange}
