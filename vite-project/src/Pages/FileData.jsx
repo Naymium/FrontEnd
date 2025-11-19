@@ -1,49 +1,80 @@
-import { useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import "../CSS/FileData.css";
+import { getAllFiles, deleteFile } from "../services/fileService";
 
 const FileData = () => {
-  // 더미 데이터 (API 연동 전까지 사용)
-  const mock = useMemo(
-    () =>
-      Array.from({ length: 42 }).map((_, i) => ({
-        id: i + 1,
-        filename: `dataset_${i + 1}.csv`,
-        count: Math.floor(Math.random() * 1000),
-        savedAt: "2025-08-17",
-      })),
-    []
-  );
+  const [dataList, setDataList] = useState([]); // 전체 파일 목록
+  const [loading, setLoading] = useState(true);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const [page, setPage] = useState(1);
   const pageSize = 10;
-  const pageCount = Math.ceil(mock.length / pageSize);
-  const start = (page - 1) * pageSize;
-  const rows = mock.slice(start, start + pageSize);
 
-  // 삭제 모달 상태
   const [confirmId, setConfirmId] = useState(null);
 
+  // ✅ 1) 파일 목록 불러오기
+useEffect(() => {
+  (async () => {
+    try {
+      const files = await getAllFiles();
+      setDataList(files);
+    } catch (e) {
+      console.error("📛 getAllFiles error:", e);
+      // 여기가 추가 포인트
+      const msg =
+        e?.response?.data?.message ||
+        e?.message ||
+        "파일 목록을 불러오는 데 실패했습니다.";
+      setErrorMsg(msg);
+    } finally {
+      setLoading(false);
+    }
+  })();
+}, []);
+
+
+  // ✅ 2) 파일 열기 (백엔드가 fileUrl 제공)
   const onOpen = (row) => {
-    alert(`"${row.filename}" 열기`);
+    if (!row.fileUrl) return alert("파일 URL이 없습니다.");
+    window.open(row.fileUrl, "_blank");
   };
 
-  const onDelete = (row) => {
-    setConfirmId(row.id);
-  };
+  // ✅ 3) 삭제 모달 열기
+  const onDelete = (row) => setConfirmId(row.id);
 
-  const onConfirmDelete = () => {
-    alert(`${confirmId}번 파일 삭제 완료 (데모)`);
-    setConfirmId(null);
+  // ✅ 4) 삭제 확정
+  const onConfirmDelete = async () => {
+    try {
+      const res = await deleteFile(confirmId);
+      if (res?.isSuccess) {
+        alert("삭제 완료!");
+        // 목록 새로고침
+        const updated = dataList.filter((f) => f.id !== confirmId);
+        setDataList(updated);
+      } else {
+        alert(res?.message || "삭제 실패");
+      }
+    } catch (e) {
+      alert("삭제 중 오류 발생");
+    } finally {
+      setConfirmId(null);
+    }
   };
 
   const onCancelDelete = () => setConfirmId(null);
 
+  // ✅ 페이지네이션
+  const pageCount = Math.ceil(dataList.length / pageSize);
+  const start = (page - 1) * pageSize;
+  const rows = dataList.slice(start, start + pageSize);
+
+  if (loading) return <div className="loading">로딩 중...</div>;
+  if (errorMsg) return <div className="error">{errorMsg}</div>;
+
   return (
     <div className="filedata-container">
-      {/* 제목 */}
       <h2 className="title">저장된 파일 데이터 확인</h2>
 
-      {/* 테이블 */}
       <div className="table">
         <div className="thead">
           <div>No.</div>
@@ -58,9 +89,9 @@ const FileData = () => {
           {rows.map((row, idx) => (
             <div className="tr" key={row.id}>
               <div>{start + idx + 1}</div>
-              <div>{row.filename}</div>
-              <div>{row.count}</div>
-              <div>{row.savedAt}</div>
+              <div>{row.fileName}</div>
+              <div>{row.dataNum}</div>
+              <div>{new Date(row.createdAt).toLocaleDateString()}</div>
               <div>
                 <button className="open-btn" onClick={() => onOpen(row)}>
                   열기
@@ -105,7 +136,7 @@ const FileData = () => {
         </button>
       </div>
 
-      {/* 삭제 확인 모달 */}
+      {/* 삭제 모달 */}
       {confirmId !== null && (
         <div className="modal-backdrop" onClick={onCancelDelete}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
