@@ -30,7 +30,7 @@ const Header = () => {
               `redirection ${isHome || isResults ? "active" : isActive ? "active" : ""}`
             }
           >
-            최신 ranging error 그래프 보기
+            최신 Ranging Error 그래프 보기
             <img className="arrow" src={arrow} />
           </NavLink>
 

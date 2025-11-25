@@ -9,14 +9,19 @@ const EntireData = () => {
   const [loading, setLoading] = useState(true);
   const [deletingId, setDeletingId] = useState(null);
 
-  const apiURL = "http://3.39.225.132:8080";
+  const apiURL = "http://52.78.10.86:8080";
 
   useEffect(() => {
     const endpoint = "/data/get";
+    // Added ?_t timestamp to prevent browser caching
     axios
-      .get(apiURL + endpoint)
+      .get(`${apiURL}${endpoint}?_t=${Date.now()}`)
       .then((res) => {
-        const dataListInstance = res.data?.result?.getAllDataResponseDTO || [];
+        let dataListInstance = res.data?.result?.getAllDataResponseDTO || [];
+        
+        // Optional: Sort by newest first (descending)
+        dataListInstance.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        
         setDataList(dataListInstance);
       })
       .catch((err) => {
@@ -54,7 +59,7 @@ const EntireData = () => {
   return (
     <div className="ed-container">
       <div className="ed-head">
-        <div className="ed-head-text">전체 데이터 확인</div>
+        <div className="ed-head-text">전체 데이터 확인 ({dataList.length}건)</div>
         <div className="ed-head-button-nest">
           <Link to="/">
             <button className="ed-button-save">저장하기</button>
@@ -88,19 +93,19 @@ const EntireData = () => {
 
                   <div className="ed-data-nest">
                     <div className="ed-data-param" id="row-1">
-                      <div className="ed-data">E1: {item.e1}</div>
-                      <div className="ed-data">E2: {item.e2}</div>
-                      <div className="ed-data">E3: {item.e3}</div>
-                      <div className="ed-data">E4: {item.e4}</div>
-                      <div className="ed-data">L1: {item.l1}</div>
-                      <div className="ed-data">L2: {item.l2}</div>
-                      <div className="ed-data">L3: {item.l3}</div>
-                      <div className="ed-data">L4: {item.l4}</div>
+                      <div className="ed-data">E1: {item.e1?.toFixed(4)}</div>
+                      <div className="ed-data">E2: {item.e2?.toFixed(4)}</div>
+                      <div className="ed-data">E3: {item.e3?.toFixed(4)}</div>
+                      <div className="ed-data">E4: {item.e4?.toFixed(4)}</div>
+                      <div className="ed-data">L1: {item.l1?.toFixed(4)}</div>
+                      <div className="ed-data">L2: {item.l2?.toFixed(4)}</div>
+                      <div className="ed-data">L3: {item.l3?.toFixed(4)}</div>
+                      <div className="ed-data">L4: {item.l4?.toFixed(4)}</div>
                     </div>
 
                     <div className="ed-data-param" id="row-2">
-                      <div className="ed-data">𝚫 : {item.delta}</div>
-                      <div className="ed-data">σ : {item.sigma}</div>
+                      <div className="ed-data">𝚫 : {item.delta?.toFixed(4)}</div>
+                      <div className="ed-data">σ : {item.sigma?.toFixed(4)}</div>
                       <div className="ed-data">
                         <div>
                           𝒇
@@ -113,12 +118,17 @@ const EntireData = () => {
                     <div className="ed-data-prediction-button-nest">
                       <div className="ed-data-prediction">
                         <div className="ed-data-prediction-status">
-                          {item.prediction} (확률: {item.probability * 100}%)
-                          {console.log(item.probability)}
+                          {item.prediction} ({(item.probability * 100).toFixed(2)}%)
                         </div>
                         <div className="ed-data-divider"> | </div>
                         <div className="ed-data-ranging-error">
-                          Ranging Error: {item.rangingError} [m]
+                          Err: {item.rangingError}m
+                        </div>
+                        
+                        {/* ✅ Timestamp Added Here */}
+                        <div className="ed-data-divider"> | </div>
+                        <div style={{ fontSize: "16px", color: "#666" }}>
+                           {new Date(item.createdAt).toLocaleString()}
                         </div>
                       </div>
 

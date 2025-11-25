@@ -37,19 +37,17 @@
 }
 
 .home button.input-confirm {
-  width: 100px;
-  height: 39px;
-  padding: 8px 20px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
   border-radius: 50px;
-  border: 2px solid #ddd;
-  background: #ddd;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 500;
+  border-width: 2px;
+  border-color: black;
+  padding: 8px 16px;
+  display: flex;
+  color: #000;
+  font-family: "Pretendard Variable";
+  font-size: clamp(14px, 1.8vw, 18px);
+  font-weight: 600;
+  line-height: 1.1;
+  background-color: #fff;
 }
 
 /*큰 상자*/
@@ -115,11 +113,11 @@
 }
 
 .input_box:disabled {
-  background-color: #f5f5f5; 
-  color: #aaa; 
-  cursor: not-allowed; 
-  border: 1px solid #ccc; 
-  opacity: 0.7; 
+  background-color: #f5f5f5;
+  color: #aaa;
+  cursor: not-allowed;
+  border: 1px solid #ccc;
+  opacity: 0.7;
 }
 
 /* 왜곡값 입력 라벨 */
