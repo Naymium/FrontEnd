@@ -53,7 +53,7 @@ export const Graph = () => {
   // 최초 1회: 두 엔드포인트를 동시에 불러와서 캐싱
   useEffect(() => {
     const fetchNormal = axios
-      .get(`${API_BASE}/graph/normal`)
+      .get(`${API_BASE}/graph`)
       .then((res) => {
         if (res.data?.isSuccess && res.data?.result) {
           setNormal({
@@ -81,7 +81,7 @@ export const Graph = () => {
       );
 
     const fetchAbnormal = axios
-      .get(`${API_BASE}/graph/abnormal/`)
+      .get(`${API_BASE}/graph`)
       .then((res) => {
         if (res.data?.isSuccess && res.data?.result) {
           setAbnormal({
