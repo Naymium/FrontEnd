@@ -1,119 +1,201 @@
-.results-container {
+/* Container & Header */
+.result-container {
   margin: 33px 100px 100px 100px;
+  font-family: "Pretendard Variable", sans-serif;
 }
 
-.results-container .result-save-export-nest {
+.result-head {
   height: 39px;
   margin-top: 33px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-}
-
-.results-container .result-text {
-  height: 100%;
-  display: flex;
-  justify-content: center;
   align-items: center;
-  color: #000;
-  font-family: "Pretendard Variable";
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
 }
 
-.results-container .button-nest {
-  height: 100%;
+.result-head-text {
+  color: #000;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.result-head-button-nest {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 0;
   gap: 20px;
 }
 
-.results-container .save-button {
+/* Buttons */
+.result-button-save {
   height: 39px;
   width: 100px;
-
   display: inline-flex;
   justify-content: center;
   align-items: center;
-
   border-radius: 50px;
   border: 2px solid #000;
   background: #000;
-
   color: #fff;
-  font-family: "Pretendard Variable";
   font-size: 16px;
-  font-style: normal;
   font-weight: 500;
-  line-height: normal;
+  cursor: pointer;
 }
 
-.results-container .export-button {
+.result-button-export {
   height: 39px;
   width: 100px;
-
   display: inline-flex;
   justify-content: center;
   align-items: center;
-
   border-radius: 50px;
   border: 2px solid #000;
   background: #fff;
-
   color: #000;
-  font-family: "Pretendard Variable";
   font-size: 16px;
-  font-style: normal;
   font-weight: 500;
-  line-height: normal;
+  cursor: pointer;
 }
 
-.results-container .sample-nest {
+.result-button-save:disabled,
+.result-button-export:disabled {
+  background: #ccc;
+  border-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Loading & Empty States */
+.result-loading,
+.result-empty-message {
+  margin-top: 50px;
+  text-align: center;
+  font-size: 18px;
+  color: #666;
+}
+
+/* List Container */
+.result-item-nest {
   margin-top: 33px;
   display: flex;
   flex-direction: column;
-  padding: 40px 60px;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  gap: 52px;
-  flex-wrap: wrap;
-  border-radius: 3px 0px 0px 3px;
-  border: 2px solid #ddd;
+  gap: 20px;
 }
 
-.results-container .sample-instance {
-  margin: 0 106px 0 106px;
+.result-item-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Individual Data Card */
+.result-data-item {
+  border: 2px solid #ddd;
+  border-radius: 3px;
+  padding: 30px 40px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #fff;
+}
+
+.result-data-item-label {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Flex Container for Label Sidebar + Data Content */
+.result-data-item-content {
   display: flex;
   flex-direction: row;
+  gap: 40px;
+}
+
+/* Sidebar Labels (Inputs / Prediction) */
+.result-data-label-nest {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-width: 80px;
+}
+
+.result-data-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px; /* Matches data row height */
+}
+
+.result-data-param-label,
+.result-data-prediction-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #555;
+}
+
+.result-data-divider {
+  color: #ddd;
+  margin-left: 10px;
+}
+
+/* Data Content Area */
+.result-data-nest {
+  display: flex;
+  flex-direction: column;
+  gap: 25px; /* Spacing between rows */
+  width: 100%;
+}
+
+/* Data Rows (E1~L4, Delta~Fd) */
+.result-data-param {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+}
+
+/* Individual Data Value Box */
+.result-data {
+  background: #f9f9f9;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 15px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  border: 1px solid #eee;
+  min-width: 100px;
+  justify-content: center;
+}
+
+/* Prediction Result Row */
+.result-data-prediction-button-nest {
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #000;
-  font-family: "Pretendard Variable";
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  gap: 48px;
+  margin-top: 10px;
+  padding-top: 15px;
+  border-top: 1px dashed #eee;
 }
 
-.results-container span {
-  width: 63px;
-}
-
-.results-container .output {
+.result-data-prediction {
   display: flex;
-  width: 797px;
-  height: 20px;
-  padding: 20px 24px;
-  justify-content: center;
   align-items: center;
-  gap: 16px;
-  flex-shrink: 0;
-  border-radius: 3px;
-  border: 2px solid #ddd;
+  gap: 20px;
+  font-size: 18px;
+}
+
+.result-data-prediction-status {
+  font-weight: 700;
+  color: #000;
+}
+
+.result-data-ranging-error {
+  color: #666;
+  font-size: 16px;
+}
+
+.result-data-timestamp {
+  color: #888;
+  font-size: 14px;
 }

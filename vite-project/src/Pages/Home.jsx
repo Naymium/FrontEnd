@@ -33,7 +33,7 @@ const Home = () => {
   const [uploadStatus, setUploadStatus] = useState(""); // e.g. "업로드 완료" / "실패"
   const navigate = useNavigate();
 
-  const apiURL = "http://3.39.225.132:8080";
+  const apiURL = "http://52.78.10.86:8080";
 
   // --- Input handler ---
   const handleChange = (e) => {
@@ -104,14 +104,13 @@ const Home = () => {
 
     setUploadFileName(file.name);
     setUploadStatus("업로드 중...");
-
-    const formData = new FormData();
-    formData.append("file", file);
+    const fileFormData = new FormData();
+    fileFormData.append("file", file);
 
     try {
-      const response = await fetch(`${apiURL}/predict/file`, {
+      const response = await fetch(`${apiURL}/predict/file-data`, {
         method: "POST",
-        body: formData,
+        body: fileFormData,
       });
       const data = await response.json();
       console.log("File upload response:", data);
