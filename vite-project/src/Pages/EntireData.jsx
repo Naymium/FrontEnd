@@ -2,26 +2,26 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-import "../CSS/EntireData.css";
+import "../CSS/EntireData.css"; // Ensures Shared.css (with spinner styles) is loaded
 
 const EntireData = () => {
   const [dataList, setDataList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [deletingId, setDeletingId] = useState(null);
 
-  const apiURL = "http://52.78.10.86:8080";
+  const apiURL = "http://43.203.173.135:8080";
 
   useEffect(() => {
     const endpoint = "/data/get";
-    // Added ?_t timestamp to prevent browser caching
+    // Add timestamp to prevent caching
     axios
       .get(`${apiURL}${endpoint}?_t=${Date.now()}`)
       .then((res) => {
         let dataListInstance = res.data?.result?.getAllDataResponseDTO || [];
-        
-        // Optional: Sort by newest first (descending)
-        dataListInstance.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-        
+        // Sort by newest first
+        dataListInstance.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
         setDataList(dataListInstance);
       })
       .catch((err) => {
@@ -35,8 +35,31 @@ const EntireData = () => {
       });
   }, []);
 
+  const handleSave = () => {
+    if (dataList.length === 0) {
+      alert("저장할 데이터가 없습니다.");
+      return;
+    }
+
+    const blob = new Blob([JSON.stringify(dataList, null, 2)], {
+      type: "application/json",
+    });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `entire_data_${new Date().toISOString().slice(0, 10)}.json`;
+    link.click();
+    URL.revokeObjectURL(link.href);
+  };
+
+  const handleExport = () => {
+    if (dataList.length > 0) {
+      console.log("Exporting all data:", dataList);
+      alert(`전체 데이터 ${dataList.length}건을 내보냈습니다. (콘솔 확인)`);
+    }
+  };
+
   const handleDelete = async (id) => {
-    if (!window.confirm(`정말로 Data ${id}를 삭제하시겠습니까?`)) return;
+    if (!window.confirm(`정말로 이 Sample을 삭제하시겠습니까?`)) return;
 
     try {
       setDeletingId(id);
@@ -54,19 +77,46 @@ const EntireData = () => {
     }
   };
 
-  if (loading) return <div className="ed-loading">데이터를 불러오는 중...</div>;
+  // ✅ UPDATED: Matching the Home.jsx spinner style
+  if (loading) {
+    return (
+      <div className="loading-overlay">
+        <div className="spinner"></div>
+        <div className="loading-text">
+          전체 데이터를 불러오는 중입니다...
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="ed-container">
       <div className="ed-head">
-        <div className="ed-head-text">전체 데이터 확인 ({dataList.length}건)</div>
+        <div className="ed-head-text">
+          전체 데이터 확인 ({dataList.length}건)
+        </div>
         <div className="ed-head-button-nest">
-          <Link to="/">
-            <button className="ed-button-save">저장하기</button>
-          </Link>
-          <Link to="/">
-            <button className="ed-button-export">내보내기</button>
-          </Link>
+          <button
+            className="ed-button-save"
+            onClick={handleSave}
+            disabled={dataList.length === 0}
+            style={{
+              cursor: dataList.length === 0 ? "not-allowed" : "pointer",
+            }}
+          >
+            저장하기
+          </button>
+
+          <button
+            className="ed-button-export"
+            onClick={handleExport}
+            disabled={dataList.length === 0}
+            style={{
+              cursor: dataList.length === 0 ? "not-allowed" : "pointer",
+            }}
+          >
+            내보내기
+          </button>
         </div>
       </div>
 
@@ -104,8 +154,12 @@ const EntireData = () => {
                     </div>
 
                     <div className="ed-data-param" id="row-2">
-                      <div className="ed-data">𝚫 : {item.delta?.toFixed(4)}</div>
-                      <div className="ed-data">σ : {item.sigma?.toFixed(4)}</div>
+                      <div className="ed-data">
+                        𝚫 : {item.delta?.toFixed(4)}
+                      </div>
+                      <div className="ed-data">
+                        σ : {item.sigma?.toFixed(4)}
+                      </div>
                       <div className="ed-data">
                         <div>
                           𝒇
@@ -118,17 +172,17 @@ const EntireData = () => {
                     <div className="ed-data-prediction-button-nest">
                       <div className="ed-data-prediction">
                         <div className="ed-data-prediction-status">
-                          {item.prediction} ({(item.probability * 100).toFixed(2)}%)
+                          {item.prediction} (
+                          {(item.probability * 100).toFixed(2)}%)
                         </div>
                         <div className="ed-data-divider"> | </div>
                         <div className="ed-data-ranging-error">
-                          Err: {item.rangingError}m
+                          Ranging Error: {item.rangingError}
+                          {" [m]"}
                         </div>
-                        
-                        {/* ✅ Timestamp Added Here */}
                         <div className="ed-data-divider"> | </div>
                         <div style={{ fontSize: "16px", color: "#666" }}>
-                           {new Date(item.createdAt).toLocaleString()}
+                          {new Date(item.createdAt).toLocaleString()}
                         </div>
                       </div>
 

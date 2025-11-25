@@ -6,7 +6,7 @@ const Results = () => {
   const [dataList, setDataList] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const apiURL = "http://52.78.10.86:8080";
+  const apiURL = "http://43.203.173.135:8080";
 
   useEffect(() => {
     const fetchData = async () => {
