@@ -139,7 +139,7 @@ const Home = () => {
 
       {/* --- Manual Input Section --- */}
       <div className="text-bracket-input-button">
-        <div className="text-bracket">입력값</div>
+        <div className="text-bracket">개별 입력</div>
         <button
           className="input-confirm"
           onClick={handleSubmit}
