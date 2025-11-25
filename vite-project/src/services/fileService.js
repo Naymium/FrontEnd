@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE = "http://3.39.225.132:8080";
+const BASE = "http://43.203.173.135:8080";
 
 // 전체 파일 목록 가져오기
 export async function getAllFiles() {
