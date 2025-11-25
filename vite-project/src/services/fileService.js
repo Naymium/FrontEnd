@@ -10,9 +10,8 @@ export async function getAllFiles() {
 }
 
 // 특정 파일 삭제하기
-export async function deleteFile(id) {
-  const { data } = await axios.delete(`${BASE}/file/{fildID}`, {
-    params: { id }, // Swagger 문서에서 path가 아닌 query로 받을 경우
-  });
+
+export async function deleteFile(fileId) {
+  const { data } = await axios.delete(`${BASE}/file/${fileId}`);
   return data;
 }
