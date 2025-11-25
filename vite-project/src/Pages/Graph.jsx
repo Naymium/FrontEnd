@@ -1,18 +1,18 @@
-// src/Pages/Graph.jsx
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-// ✅ CSS는 통합된 Graph.css 하나만 쓰는 중 (너가 합친 파일)
 import "../CSS/Graph.css";
 
 import rightArrow from "../assets/free-icon-right-arrow-271228.png";
 import leftArrow from "../assets/free-icon-left-arrow-271220.png";
 
-/** 공통 저장 함수 */
+/** Common Save Function */
 async function saveImage(imageUrl, filename) {
   try {
-    if (!imageUrl) throw new Error("저장할 이미지가 없습니다.");
+    if (!imageUrl) throw new Error("No image to save.");
+    
     const resp = await fetch(imageUrl, { mode: "cors" });
+    if (!resp.ok) throw new Error("Network response was not ok");
+    
     const blob = await resp.blob();
     const url = URL.createObjectURL(blob);
 
@@ -21,20 +21,34 @@ async function saveImage(imageUrl, filename) {
     a.download = filename;
     document.body.appendChild(a);
     a.click();
-    a.remove();
+    document.body.removeChild(a);
     URL.revokeObjectURL(url);
   } catch (e) {
-    alert("이미지 저장 실패: " + (e.message || "알 수 없는 오류"));
+    console.error(e);
+    if (window.confirm("이미지 저장에 실패했습니다 (CORS). 새 탭에서 이미지를 여시겠습니까?")) {
+      window.open(imageUrl, "_blank");
+    }
   }
 }
 
-const API_BASE = "http://3.39.225.132:8080";
+/** Helper to get YYYYMMDD_HHMMSS timestamp */
+const getFormattedTimestamp = () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+  return `${year}${month}${day}_${hours}${minutes}${seconds}`;
+};
+
+const API_BASE = "http://52.78.10.86:8080";
 
 export const Graph = () => {
-  // 어떤 화면을 보여줄지 (normal | abnormal)
-  const [mode, setMode] = useState("normal");
+  const [mode, setMode] = useState("normal"); // 'normal' or 'abnormal'
 
-  // 정상 데이터
+  // State for Normal Data
   const [normal, setNormal] = useState({
     sampleCount: 0,
     imageUrl: "",
@@ -42,7 +56,7 @@ export const Graph = () => {
     errorMsg: "",
   });
 
-  // 비정상 데이터
+  // State for Abnormal Data
   const [abnormal, setAbnormal] = useState({
     sampleCount: 0,
     imageUrl: "",
@@ -50,133 +64,105 @@ export const Graph = () => {
     errorMsg: "",
   });
 
-  // 최초 1회: 두 엔드포인트를 동시에 불러와서 캐싱
   useEffect(() => {
-    const fetchNormal = axios
-      .get(`${API_BASE}/graph`)
-      .then((res) => {
+    const fetchData = async () => {
+      try {
+        // Single Call to fetch all data with a 5s timeout
+        const res = await axios.get(`${API_BASE}/graph`, { timeout: 5000 });
+        
         if (res.data?.isSuccess && res.data?.result) {
+          const result = res.data.result;
+
+          // Update Normal State
           setNormal({
-            sampleCount: res.data.result.dataNum ?? 0,
-            imageUrl: res.data.result.imageUrl ?? "",
+            sampleCount: result.normalDataNum || 0,
+            imageUrl: result.normalDataUrl || "",
             loading: false,
             errorMsg: "",
           });
-        } else {
-          setNormal((prev) => ({
-            ...prev,
-            loading: false,
-            errorMsg: res.data?.message || "데이터가 없습니다.",
-          }));
-        }
-      })
-      .catch((err) =>
-        setNormal((prev) => ({
-          ...prev,
-          loading: false,
-          errorMsg:
-            "요청 실패: " +
-            (err?.response?.data?.message || err.message || "알 수 없는 오류"),
-        }))
-      );
 
-    const fetchAbnormal = axios
-      .get(`${API_BASE}/graph`)
-      .then((res) => {
-        if (res.data?.isSuccess && res.data?.result) {
+          // Update Abnormal State
           setAbnormal({
-            sampleCount: res.data.result.dataNum ?? 0,
-            imageUrl: res.data.result.imageUrl ?? "",
+            sampleCount: result.abnormalDataNum || 0,
+            imageUrl: result.abnormalDataUrl || "",
             loading: false,
             errorMsg: "",
           });
         } else {
-          setAbnormal((prev) => ({
-            ...prev,
-            loading: false,
-            errorMsg: res.data?.message || "데이터가 없습니다.",
-          }));
+          throw new Error(res.data?.message || "데이터를 불러올 수 없습니다.");
         }
-      })
-      .catch((err) =>
-        setAbnormal((prev) => ({
-          ...prev,
-          loading: false,
-          errorMsg:
-            "요청 실패: " +
-            (err?.response?.data?.message || err.message || "알 수 없는 오류"),
-        }))
-      );
+      } catch (err) {
+        console.error("Fetch Error:", err);
+        const errMsg = err.message || "서버 연결 실패";
+        
+        // Set error for both states since they come from the same source
+        setNormal((prev) => ({ ...prev, loading: false, errorMsg: errMsg }));
+        setAbnormal((prev) => ({ ...prev, loading: false, errorMsg: errMsg }));
+      }
+    };
 
-    // 병렬 호출
-    Promise.allSettled([fetchNormal, fetchAbnormal]);
+    fetchData();
   }, []);
 
-  // 화면 전환 (페이지 로드 없이)
   const goNext = () => setMode("abnormal");
   const goPrev = () => setMode("normal");
 
-  // =========================
-  //  정상 섹션 (class 유지)
-  // =========================
-  const NormalSection = (
-    <div className="graph-container">
-      <div className="graph-section-divider" />
+  // --- Render Sections ---
 
-      <div className="graph-section-title">Ranging Error Graph (정상 데이터)</div>
+  if (mode === "normal") {
+    return (
+      <div className="graph-container">
+        <div className="graph-section-divider" />
+        <div className="graph-section-title">Ranging Error Graph (정상 데이터)</div>
 
-      <div className="graph-sample-save-wrapper">
-        <div className="sample-count">
-          샘플 개수: {String(normal.sampleCount).padStart(8, "0")}
+        <div className="graph-sample-save-wrapper">
+          <div className="sample-count">
+            샘플 개수: {String(normal.sampleCount).padStart(8, "0")}
+          </div>
+          <button
+            className="save-button"
+            // ✅ Change 2: Use dynamic date+time in filename
+            onClick={() => saveImage(normal.imageUrl, `normal_graph_${getFormattedTimestamp()}.png`)}
+            disabled={!normal.imageUrl}
+          >
+            저장하기
+          </button>
         </div>
-        <button
-          className="save-button"
-          onClick={() => saveImage(normal.imageUrl, "normal_graph.png")}
-        >
-          저장하기
-        </button>
-      </div>
 
-      <div className="graph-box">
-        {normal.loading ? (
-          <div>불러오는 중...</div>
-        ) : normal.errorMsg ? (
-          <div style={{ color: "red" }}>{normal.errorMsg}</div>
-        ) : normal.imageUrl ? (
-          <img
-            className="graph-image"
-            src={normal.imageUrl}
-            alt="Normal Graph"
-            style={{ display: "block" }}
-          />
-        ) : (
-          <div>그래프가 없습니다.</div>
-        )}
-      </div>
+        <div className="graph-box">
+          {normal.loading ? (
+            <div className="result-loading">데이터를 불러오는 중입니다...</div>
+          ) : normal.errorMsg ? (
+            <div style={{ color: "red", textAlign: "center" }}>
+              ⚠️ {normal.errorMsg} <br/>
+              <button onClick={() => window.location.reload()}>새로고침</button>
+            </div>
+          ) : normal.imageUrl ? (
+            // ✅ Change 1: Added styles to fit image to frame
+            <img 
+              className="graph-image" 
+              src={normal.imageUrl} 
+              alt="Normal Graph" 
+              style={{ width: "100%", height: "100%", objectFit: "contain" }}
+            />
+          ) : (
+            <div className="result-empty-message">그래프가 없습니다.</div>
+          )}
+        </div>
 
-      {/* ▶ 오른쪽 화살표: 비정상으로 전환 */}
-      <div className="arrow-button-container">
-        <button
-          className="arrow-button"
-          onClick={goNext}
-          style={{ background: "none", border: "none", padding: 0 }}
-          aria-label="Go to abnormal graph"
-          title="비정상 데이터 보기"
-        >
-          <img src={rightArrow} alt="" />
-        </button>
+        <div className="arrow-button-container">
+          <button className="arrow-button" onClick={goNext}>
+            <img src={rightArrow} alt="Next" />
+          </button>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 
-  // =========================
-  //  비정상 섹션 (class 유지)
-  // =========================
-  const AbnormalSection = (
+  // Abnormal Mode
+  return (
     <div className="abnormal-graph-container">
-      <div className="abnormal-section-title">
-        Ranging Error Graph (비정상 데이터)
-      </div>
+      <div className="abnormal-section-title">Ranging Error Graph (비정상 데이터)</div>
 
       <div className="abnormal-sample-save-wrapper">
         <div className="sample-count">
@@ -184,7 +170,9 @@ export const Graph = () => {
         </div>
         <button
           className="save-button"
-          onClick={() => saveImage(abnormal.imageUrl, "abnormal_graph.png")}
+          // ✅ Change 2: Use dynamic date+time in filename
+          onClick={() => saveImage(abnormal.imageUrl, `abnormal_graph_${getFormattedTimestamp()}.png`)}
+          disabled={!abnormal.imageUrl}
         >
           저장하기
         </button>
@@ -192,44 +180,30 @@ export const Graph = () => {
 
       <div className="abnormal-graph-box">
         {abnormal.loading ? (
-          <div>불러오는 중...</div>
+          <div className="result-loading">데이터를 불러오는 중입니다...</div>
         ) : abnormal.errorMsg ? (
-          <div style={{ color: "red" }}>{abnormal.errorMsg}</div>
+          <div style={{ color: "red", textAlign: "center" }}>
+             ⚠️ {abnormal.errorMsg}
+          </div>
         ) : abnormal.imageUrl ? (
           <img
             src={abnormal.imageUrl}
             alt="Abnormal Graph"
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "contain",
-              display: "block",
-            }}
+            // This already had the correct styles, kept for consistency
+            style={{ width: "100%", height: "100%", objectFit: "contain" }}
           />
         ) : (
-          <div>그래프가 없습니다.</div>
+          <div className="result-empty-message">그래프가 없습니다.</div>
         )}
       </div>
 
-      {/* ◀ 왼쪽 화살표: 정상으로 전환 */}
       <div className="left-arrow-button-container">
-        <button
-          className="arrow-button"
-          onClick={goPrev}
-          style={{ background: "none", border: "none", padding: 0 }}
-          aria-label="Back to normal graph"
-          title="정상 데이터 보기"
-        >
-          <img src={leftArrow} alt="" />
+        <button className="arrow-button" onClick={goPrev}>
+          <img src={leftArrow} alt="Prev" />
         </button>
       </div>
     </div>
   );
-
-  // 현재 모드에 따라 한 섹션만 표시 (페이지 이동 없음)
-  return mode === "normal" ? NormalSection : AbnormalSection;
 };
 
-// (원래 파일처럼 named export 유지 – 컴포넌트/클래스명 변경 없음)
-export const AbnormalGraph = () => null; // 라우팅은 안 쓰지만 export는 남김(호환용)
 export default Graph;

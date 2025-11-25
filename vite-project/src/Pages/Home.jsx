@@ -1,13 +1,11 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-
-import "../CSS/Home.css";
-
+import "../CSS/Home.css"; // Ensure Shared.css is imported inside here
 import CheckBoxToggle from "../Components/CheckBoxToggle.jsx";
 import upload from "../assets/upload.svg";
 
 const Home = () => {
-  // --- Input form data ---
+  // --- States ---
   const [formData, setFormData] = useState({
     E1: "",
     E2: "",
@@ -30,27 +28,30 @@ const Home = () => {
   });
 
   const [uploadFileName, setUploadFileName] = useState("");
-  const [uploadStatus, setUploadStatus] = useState(""); // e.g. "업로드 완료" / "실패"
+
+  // ✅ NEW: Loading State
+  const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
+  const apiURL = "http://43.203.173.135:8080";
 
-  const apiURL = "http://52.78.10.86:8080";
-
-  // --- Input handler ---
+  // --- Handlers ---
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const safeNumber = (value) => (value === "" ? 0 : Number(value));
+  const handleToggle = (field) => {
+    setActiveFields((prev) => ({ ...prev, [field]: !prev[field] }));
+  };
 
-  // --- Send request to server ---
+  // --- Submit Logic (Manual) ---
   const handleSubmit = async () => {
+    // ✅ Start Loading
+    setIsLoading(true);
+
     try {
       const endpoint = "/predict/data";
-
-      // make payload excluding inactive fields
       const payload = {
         e1: safeNumber(formData.E1),
         e2: safeNumber(formData.E2),
@@ -64,6 +65,7 @@ const Home = () => {
         delta: activeFields.delta ? safeNumber(formData.delta) : 0,
         fd: activeFields.fd ? safeNumber(formData.fd) : 0,
         sigma: activeFields.sigma ? safeNumber(formData.sigma) : 0,
+        createdAt: new Date().toISOString(),
       };
 
       const response = await fetch(apiURL + endpoint, {
@@ -75,23 +77,17 @@ const Home = () => {
       const data = await response.json();
       console.log("Server Response:", data);
 
-      // 성공 시 결과 페이지로 이동 (데이터 함께 전달)
+      // Navigate to results
       navigate("/results", { state: { resultData: data } });
     } catch (error) {
       console.error("Error:", error);
       alert("서버와 통신 중 오류가 발생했습니다.");
+      setIsLoading(false); // ✅ Stop loading only on error
     }
+    // Note: If success, we navigate away, so no need to set loading false
   };
 
-  // --- Toggle handler ---
-  const handleToggle = (field) => {
-    setActiveFields((prev) => ({
-      ...prev,
-      [field]: !prev[field],
-    }));
-  };
-
-  // --- File drop handler ---
+  // --- File Upload Logic ---
   const handleFileDrop = async (e) => {
     e.preventDefault();
     const file = e.dataTransfer.files[0];
@@ -103,9 +99,13 @@ const Home = () => {
     }
 
     setUploadFileName(file.name);
-    setUploadStatus("업로드 중...");
+
+    // ✅ Start Loading
+    setIsLoading(true);
+
     const fileFormData = new FormData();
     fileFormData.append("file", file);
+    fileFormData.append("createdAt", new Date().toISOString());
 
     try {
       const response = await fetch(`${apiURL}/predict/file-data`, {
@@ -113,30 +113,44 @@ const Home = () => {
         body: fileFormData,
       });
       const data = await response.json();
-      console.log("File upload response:", data);
 
-      setUploadStatus("업로드 완료");
       navigate("/results", { state: { resultData: data } });
     } catch (error) {
       console.error("File upload error:", error);
-      setUploadStatus("업로드 실패");
+      alert("파일 업로드 실패");
+      setIsLoading(false); // ✅ Stop loading on error
     }
   };
 
   return (
     <div className="home">
+      {/* ✅ Loading Overlay Component */}
+      {isLoading && (
+        <div className="loading-overlay">
+          <div className="spinner"></div>
+          <div className="loading-text">
+            데이터 분석 중입니다... <br />
+            잠시만 기다려주세요.
+          </div>
+        </div>
+      )}
+
       <div className="text-input-or-file">입력 or 파일첨부 택1</div>
 
-      {/* --- 입력 영역 --- */}
+      {/* --- Manual Input Section --- */}
       <div className="text-bracket-input-button">
         <div className="text-bracket">입력값</div>
-        <button className="input-confirm" onClick={handleSubmit}>
-          입력하기
+        <button
+          className="input-confirm"
+          onClick={handleSubmit}
+          disabled={isLoading} // ✅ Disable button while loading
+        >
+          {isLoading ? "처리중..." : "입력하기"}
         </button>
       </div>
 
       <div className="input-nest">
-        {/* --- 왼쪽 입력 (필수) --- */}
+        {/* Left Subnest */}
         <div
           className="input-subnest"
           id="left-subnest"
@@ -146,19 +160,20 @@ const Home = () => {
           {["E1", "E2", "E3", "E4", "L1", "L2", "L3", "L4", "RangingError"].map(
             (field) => (
               <div className="input-instance" key={field}>
-                {field}
+                <div className="input-instance-label">{field}</div>
                 <input
                   className="input_box"
                   name={field}
                   value={formData[field]}
                   onChange={handleChange}
+                  disabled={isLoading} // Optional: block input while loading
                 />
               </div>
             )
           )}
         </div>
 
-        {/* --- 오른쪽 입력 (선택) --- */}
+        {/* Right Subnest */}
         <div className="input-subnest" id="right-subnest">
           <div className="distortion-text">
             왜곡값 입력 <span style={{ color: "#8a8a8a" }}>(선택사항)</span>
@@ -169,13 +184,13 @@ const Home = () => {
               checked={activeFields.delta}
               onToggle={() => handleToggle("delta")}
             />
-            𝚫{" "}
+            𝚫
             <input
               className="input_box"
               name="delta"
               value={formData.delta}
               onChange={handleChange}
-              disabled={!activeFields.delta}
+              disabled={!activeFields.delta || isLoading}
             />
           </div>
 
@@ -192,7 +207,7 @@ const Home = () => {
               name="fd"
               value={formData.fd}
               onChange={handleChange}
-              disabled={!activeFields.fd}
+              disabled={!activeFields.fd || isLoading}
             />
           </div>
 
@@ -201,13 +216,13 @@ const Home = () => {
               checked={activeFields.sigma}
               onToggle={() => handleToggle("sigma")}
             />
-            𝝈{" "}
+            𝝈
             <input
               className="input_box"
               name="sigma"
               value={formData.sigma}
               onChange={handleChange}
-              disabled={!activeFields.sigma}
+              disabled={!activeFields.sigma || isLoading}
             />
           </div>
         </div>
@@ -215,24 +230,25 @@ const Home = () => {
 
       <div style={{ height: "29px", borderBottom: "2px solid #ddd" }} />
 
-      {/* --- 파일 업로드 영역 --- */}
+      {/* --- File Upload Section --- */}
       <div className="text-bracket-input-button">
-        <div className="text-bracket">파일첨부</div>
+        <div className="text-bracket">파일첨부{" (.json)"}</div>
         <div className="file-info-text">
-          {uploadFileName
-            ? `${uploadFileName} (${uploadStatus})`
-            : "일반파일 0KB / 최대 10MB"}
+          {uploadFileName ? uploadFileName : "일반파일 0KB / 최대 10MB"}
         </div>
       </div>
 
       <div
         className="drag-drop-nest"
-        onDrop={handleFileDrop}
+        onDrop={!isLoading ? handleFileDrop : null} // Disable drop while loading
         onDragOver={(e) => e.preventDefault()}
+        style={{ opacity: isLoading ? 0.5 : 1 }} // Visual cue
       >
         <div className="drag-drop-text">
           <img className="upload" src={upload} alt="upload" />
-          첨부파일을 마우스로 끌어 놓으세요
+          {isLoading
+            ? "업로드 처리 중..."
+            : "첨부파일을 마우스로 끌어 놓으세요"}
         </div>
       </div>
     </div>
